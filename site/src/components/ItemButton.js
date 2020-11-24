@@ -1,9 +1,9 @@
 import React from 'react';
 import './ItemButton.css';
 
-export default function ItemButton({ action, onClick }) {
+export default function ItemButton({ action, isDisabled, onClick }) {
   return (
-    <button className="ItemButton" onClick={onClick}>
+    <button disabled={isDisabled} className="ItemButton" onClick={onClick}>
       {action}
     </button>
   );

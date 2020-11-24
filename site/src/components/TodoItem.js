@@ -33,7 +33,7 @@ export default function TodoItem({ item, onChange }) {
   return (
     <li className="TodoItem">
       <span className={textClassName}>{todo.text}</span>
-      <ItemButton action="Edit" onClick={editText} />
+      <ItemButton action="Edit" onClick={editText} isDisabled={todo.isDone} />
       <ItemButton action="Delete" onClick={markAsDeleted} />
       <ItemButton action="Toggle" onClick={toggleIsDone} />
     </li>
