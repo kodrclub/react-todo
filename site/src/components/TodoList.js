@@ -16,13 +16,17 @@ export default function TodoList({ items, onChange }) {
       'Nothing to do. Yay!'
     ) : (
       <ul>
-        {items.map((item, index) => {
-          //items marked as deleted should be ignored
-          if (item.isDeleted) {
-            return '';
-          }
-          return <TodoItem key={index} item={item} onChange={itemDidChange} />;
-        })}
+        {items
+          .map((item, index) => {
+            //items marked as deleted should be ignored
+            if (item.isDeleted) {
+              return '';
+            }
+            return (
+              <TodoItem key={index} item={item} onChange={itemDidChange} />
+            );
+          })
+          .reverse()}
       </ul>
     );
 
