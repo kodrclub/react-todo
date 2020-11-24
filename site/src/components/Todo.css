@@ -1,4 +1,13 @@
 .Todo {
   background: rgba(0, 0, 0, 0.2);
-  padding: 1em;
+  padding: 0.5em;
 }
+
+/*//////////////////////////////////////*/
+.foo {
+  display: flex;
+}
+.foo.TodoList {
+  flex: 1 0;
+}
+/*/ /////////////////////////////////////*/

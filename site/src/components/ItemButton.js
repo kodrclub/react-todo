@@ -1,6 +1,10 @@
 import React from 'react';
 import './ItemButton.css';
 
-export default function ItemButton({ action }) {
-  return <button className="ItemButton">{action}</button>;
+export default function ItemButton({ action, onClick }) {
+  return (
+    <button className="ItemButton" onClick={onClick}>
+      {action}
+    </button>
+  );
 }

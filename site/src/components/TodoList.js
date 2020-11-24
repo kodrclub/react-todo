@@ -9,7 +9,7 @@ export default function TodoList({ items, setItems }) {
     ) : (
       <ul>
         {items.map((item) => {
-          return <TodoItem item={item} />;
+          return <TodoItem key={item.id} item={item} />;
         })}
       </ul>
     );

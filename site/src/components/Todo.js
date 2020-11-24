@@ -7,16 +7,19 @@ import TodoList from './TodoList';
 
 export default function Todo() {
   const [items, setItems] = useState([
-    { text: 'item A', isDone: false },
-    { text: 'item B', isDone: true },
-    { text: 'item C', isDone: false },
+    { id: 1, text: 'item A', isDone: false },
+    { id: 2, text: 'item B', isDone: true },
+    { id: 3, text: 'item C', isDone: false },
   ]);
 
   return (
     <div className="Todo">
       <h1>Todo</h1>
       <TodoInput />
-      <TodoList items={items} setItems={setItems} />
+      <div className="foo">
+        <TodoList items={items} setItems={setItems} />
+        <TodoList items={items} setItems={setItems} />
+      </div>
       <TodoClear />
     </div>
   );
