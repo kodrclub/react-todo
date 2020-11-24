@@ -6,9 +6,16 @@
   padding: 1em;
   margin-bottom: 1em;
 }
-.TodoItem.text {
+
+.isDone,
+isNotDone {
   flex: 10 0;
 }
+.isDone {
+  text-decoration: line-through;
+  opacity: 0.3;
+}
+
 .TodoItem.itemButton {
   flex: 1 0;
 }

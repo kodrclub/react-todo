@@ -3,9 +3,11 @@ import './TodoItem.css';
 import ItemButton from './ItemButton';
 
 export default function TodoItem({ item }) {
+  const textClassName = item.isDone ? 'isDone' : 'isNotDone';
   return (
     <li className="TodoItem">
-      <span className="text">{item.text}</span>
+      <span className={textClassName}>{item.text}</span>
+
       <ItemButton action="Edit" />
       <ItemButton action="Delete" />
       <ItemButton action="Toggle" />
