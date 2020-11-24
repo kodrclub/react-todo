@@ -4,8 +4,8 @@ import TodoItem from './TodoItem';
 
 export default function TodoList({ items, onChange }) {
   const itemDidChange = (item) => {
-    console.log('item did change ' + item.isDone + ' ' + item.id);
-    items.push({ id: Math.random(), text: 'rando', isDone: false });
+    const index = items.findIndex((oldItem) => item.id === oldItem.id);
+    items[index] = { ...item, isDone: item.isDone, text: item.text };
     onChange(items);
   };
 
@@ -14,10 +14,8 @@ export default function TodoList({ items, onChange }) {
       'Nothing to do. Yay!'
     ) : (
       <ul>
-        {items.map((item) => {
-          return (
-            <TodoItem key={item.id} item={item} onChange={itemDidChange} />
-          );
+        {items.map((item, index) => {
+          return <TodoItem key={index} item={item} onChange={itemDidChange} />;
         })}
       </ul>
     );

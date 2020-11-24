@@ -3,25 +3,27 @@ import './TodoItem.css';
 import ItemButton from './ItemButton';
 
 export default function TodoItem({ item, onChange }) {
-  const [isDone, setIsDone] = useState(item.isDone);
-  const [text, setText] = useState(item.text);
+  const [todo, setTodo] = useState(item);
 
   const toggleIsDone = () => {
-    setIsDone(!isDone);
-    item.isDone = isDone;
-    onChange(item);
+    todo.isDone = !todo.isDone;
+    updateTodo(todo);
   };
 
   const editText = () => {
-    setText(text + '*');
-    item.text = text;
-    onChange(item);
+    todo.text = Math.random().toString().substr(-6);
+    updateTodo(todo);
   };
 
-  const textClassName = isDone ? 'isDone' : 'isNotDone';
+  const updateTodo = () => {
+    setTodo((todo) => todo);
+    onChange(todo);
+  };
+
+  const textClassName = todo.isDone ? 'isDone' : 'isNotDone';
   return (
     <li className="TodoItem">
-      <span className={textClassName}>{item.text}</span>
+      <span className={textClassName}>{todo.text}</span>
       <ItemButton action="Edit" onClick={editText} />
       <ItemButton action="Delete" />
       <ItemButton action="Toggle" onClick={toggleIsDone} />

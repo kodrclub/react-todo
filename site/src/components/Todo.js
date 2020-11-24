@@ -13,7 +13,7 @@ export default function Todo() {
   ]);
 
   const itemsDidChange = (items) => {
-    setItems(items);
+    setItems((items) => [...items]);
   };
 
   const didClickAddItem = () => {
@@ -24,7 +24,6 @@ export default function Todo() {
       isDone: false,
     };
     setItems((items) => [...items, newItem]);
-    console.log(items);
   };
 
   const didClickClearItems = () => {

@@ -8,7 +8,7 @@
 }
 
 .isDone,
-isNotDone {
+.isNotDone {
   flex: 10 0;
 }
 .isDone {
