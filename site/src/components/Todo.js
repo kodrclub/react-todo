@@ -28,7 +28,15 @@ export default function Todo() {
 
   const didClickClearItems = () => {
     if (window.confirm('Clear all items. Are you sure?')) {
-      setItems([]);
+      // Every item that's already marked as deleted is left as is
+      // Every other item gets marked as deleted as of this moment
+      const allClear = items.map((item) => {
+        if (!item.isDeleted) {
+          item.isDeleted = Date();
+        }
+        return item;
+      });
+      setItems((items) => allClear);
     }
   };
 

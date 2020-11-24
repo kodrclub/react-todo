@@ -5,13 +5,22 @@ import ItemButton from './ItemButton';
 export default function TodoItem({ item, onChange }) {
   const [todo, setTodo] = useState(item);
 
-  const toggleIsDone = () => {
-    todo.isDone = !todo.isDone;
+  const editText = () => {
+    todo.text = Math.random().toString().substr(-6);
     updateTodo(todo);
   };
 
-  const editText = () => {
-    todo.text = Math.random().toString().substr(-6);
+  // Instead of actually deleting items
+  // we'll just mark them as such by adding a timestamp to the isDeleted prop
+  const markAsDeleted = () => {
+    if (window.confirm('Delete ?')) {
+      todo.isDeleted = Date();
+      updateTodo(todo);
+    }
+  };
+
+  const toggleIsDone = () => {
+    todo.isDone = !todo.isDone;
     updateTodo(todo);
   };
 
@@ -25,7 +34,7 @@ export default function TodoItem({ item, onChange }) {
     <li className="TodoItem">
       <span className={textClassName}>{todo.text}</span>
       <ItemButton action="Edit" onClick={editText} />
-      <ItemButton action="Delete" />
+      <ItemButton action="Delete" onClick={markAsDeleted} />
       <ItemButton action="Toggle" onClick={toggleIsDone} />
     </li>
   );
