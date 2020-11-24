@@ -13,7 +13,7 @@ export default function TodoItem({ item, onChange }) {
   // For historical purposes, instead of actually deleting items
   // we'll just mark them as such by adding a timestamp to the isDeleted prop
   const markAsDeleted = () => {
-    if (window.confirm('Delete ?')) {
+    if (window.confirm(`Delete "${todo.text}". Are you sure?`)) {
       todo.isDeleted = Date();
       updateTodo(todo);
     }
