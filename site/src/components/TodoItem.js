@@ -1,16 +1,14 @@
 import React from 'react';
 import './TodoItem.css';
-import ItemEdit from './ItemEdit';
-import ItemDelete from './ItemDelete';
-import ItemMarkDone from './ItemMarkDone';
+import ItemButton from './ItemButton';
 
-export default function TodoItem() {
+export default function TodoItem({ item }) {
   return (
-    <div className="TodoItem">
-      TodoItem
-      <ItemEdit />
-      <ItemDelete />
-      <ItemMarkDone />
-    </div>
+    <li className="TodoItem">
+      <span className="text">{item.text}</span>
+      <ItemButton action="Edit" />
+      <ItemButton action="Delete" />
+      <ItemButton action="Toggle" />
+    </li>
   );
 }

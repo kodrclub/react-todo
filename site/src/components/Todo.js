@@ -6,7 +6,11 @@ import TodoInput from './TodoInput';
 import TodoList from './TodoList';
 
 export default function Todo() {
-  const [items, setItems] = useState(['item A', 'item B', 'item C']);
+  const [items, setItems] = useState([
+    { text: 'item A', isDone: false },
+    { text: 'item B', isDone: true },
+    { text: 'item C', isDone: false },
+  ]);
 
   return (
     <div className="Todo">
