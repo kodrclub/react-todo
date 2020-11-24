@@ -34,7 +34,7 @@ help:
 # .PHONY: deploy
 
 dev: ## start React in dev mode
->	@make run cmd="yarn start"
+>	@make runp cmd="yarn start"
 .PHONY: dev
 
 img: ## build docker image
@@ -51,16 +51,16 @@ init: ## initialize project
 # > @make deploy
 # .PHONY: deploy
 
-run: ## run arbitrary command (Usage: make run cmd="COMMAND PLUS ARGUMENTS")(Example: make run cmd="node -v").
+runp: ## run arbitrary command (Usage: make run cmd="COMMAND PLUS ARGUMENTS")(Example: make run cmd="node -v"). Default port is mapped
 >	@docker run -it -u $(shell id -u):$(shell id -g) --rm -v $(shell pwd)$(SITE_DIR):$(SITE_DIR) -p $(PORT):$(PORT) $(IMAGE) $(cmd)
 .PHONY: run
 
-runnop: ## Same as make run, but no ports are mapped to avoid conflicts
+run: ## Same as make runp, but no ports are mapped to avoid conflicts
 >	@docker run -it -u $(shell id -u):$(shell id -g) --rm -v $(shell pwd)$(SITE_DIR):$(SITE_DIR) $(IMAGE) $(cmd)
 .PHONY: run
 
-shell: ## start shell inside container
->	@docker run -it -u $(shell id -u):$(shell id -g) --rm -v $(shell pwd)$(SITE_DIR):$(SITE_DIR) -p $(PORT):$(PORT) $(IMAGE) bash
+shell: ## start shell inside a container with default port mapped
+>	@make runp cmd="bash"
 .PHONY: shell
 
 test: ## start React in test mode
