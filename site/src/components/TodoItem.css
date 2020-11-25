@@ -19,3 +19,12 @@
 .TodoItem.itemButton {
   flex: 1 0;
 }
+
+.EditModal {
+  padding: 1em;
+  background: red;
+}
+/* .modal > .content {
+  width: 100%;
+  padding: 10px 5px;
+} */

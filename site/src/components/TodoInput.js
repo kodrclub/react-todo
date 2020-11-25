@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './TodoInput.css';
 
-export default function TodoInput({ onClick }) {
-  const [value, setValue] = useState('');
+export default function TodoInput({ initVal, buttonText, onClick }) {
+  const [value, setValue] = useState(initVal);
   const [isValid, setIsValid] = useState(false);
 
   const handleChange = (e) => {
@@ -20,10 +20,9 @@ export default function TodoInput({ onClick }) {
     $ - ...to the end of the string
     + - the string needs to contain one or more...
     [a-z0-9 ] - ...of these characters:
-        - characters from a to z (or A to Z since we are using the i flag to ignore case)
-        - characters from 0 to 9
-        - spaces
-
+    - characters from a to z (or A to Z since we are using the i flag to ignore case)
+    - characters from 0 to 9
+    - spaces
     */
     const regex = /^[a-z0-9 ]+$/gi;
     const newIsValid = value.match(regex);
@@ -39,6 +38,10 @@ export default function TodoInput({ onClick }) {
     setIsValid((isValid) => false);
   };
 
+  useEffect(() => {
+    validate(initVal || '');
+  }, []);
+
   return (
     <form onSubmit={handleSubmit} className="TodoInput">
       <input
@@ -47,7 +50,7 @@ export default function TodoInput({ onClick }) {
         onChange={handleChange}
         type="text"
       />
-      <input type="submit" disabled={!isValid} value="Add" />
+      <input type="submit" disabled={!isValid} value={buttonText || 'Add'} />
     </form>
   );
 }

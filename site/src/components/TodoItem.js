@@ -1,10 +1,18 @@
 import React from 'react';
 import './TodoItem.css';
 import ItemButton from './ItemButton';
+import TodoInput from './TodoInput';
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
 
 export default function TodoItem({ item, onChange }) {
   const editText = () => {
     item.text = Math.random().toString().substr(-6);
+    onChange(item);
+  };
+
+  const didEditText = (t) => {
+    item.text = t;
     onChange(item);
   };
 
@@ -23,12 +31,34 @@ export default function TodoItem({ item, onChange }) {
   };
 
   const textClassName = item.isDone ? 'isDone' : 'isNotDone';
+
   return (
     <li className="TodoItem">
-      <span className={textClassName}>{item.text}</span>
-      <ItemButton action="Edit" onClick={editText} isDisabled={item.isDone} />
-      <ItemButton action="Delete" onClick={markAsDeleted} />
       <ItemButton action="Toggle" onClick={toggleIsDone} />
+
+      <span className={textClassName}>{item.text}</span>
+
+      {/* <ItemButton action="Edit" onClick={editText} isDisabled={item.isDone} /> */}
+      {/* ////////////////////////////////////////////////////////////////////////////////// */}
+      <Popup
+        modal
+        className="EditModal"
+        trigger={<ItemButton action="Edit" isDisabled={item.isDone} />}
+      >
+        {(close) => (
+          <TodoInput
+            initVal={item.text}
+            buttonText="OK"
+            onClick={(t) => {
+              didEditText(t);
+              close();
+            }}
+          />
+        )}
+      </Popup>
+      {/* ////////////////////////////////////////////////////////////////////////////////// */}
+
+      <ItemButton action="Delete" onClick={markAsDeleted} />
     </li>
   );
 }
