@@ -1,17 +1,16 @@
 import React from 'react';
 import './TodoItem.css';
-import ItemButton from './ItemButton';
 import TodoInput from './TodoInput';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 
 export default function TodoItem({ item, onChange }) {
-  const editText = () => {
-    item.text = Math.random().toString().substr(-6);
-    onChange(item);
-  };
+  // const editText = () => {
+  //   item.text = Math.random().toString().substr(-6);
+  //   onChange(item);
+  // };
 
-  const didEditText = (t) => {
+  const handleUpdateText = (t) => {
     item.text = t;
     onChange(item);
   };
@@ -34,31 +33,31 @@ export default function TodoItem({ item, onChange }) {
 
   return (
     <li className="TodoItem">
-      <ItemButton action="Toggle" onClick={toggleIsDone} />
+      <button onClick={toggleIsDone}>Toggle</button>
 
       <span className={textClassName}>{item.text}</span>
 
-      {/* <ItemButton action="Edit" onClick={editText} isDisabled={item.isDone} /> */}
-      {/* ////////////////////////////////////////////////////////////////////////////////// */}
       <Popup
         modal
         className="EditModal"
-        trigger={<ItemButton action="Edit" isDisabled={item.isDone} />}
+        trigger={<button disabled={item.isDone}>Edit</button>}
       >
         {(close) => (
           <TodoInput
-            initVal={item.text}
-            buttonText="OK"
-            onClick={(t) => {
-              didEditText(t);
+            value={item.text}
+            buttonText="Update"
+            onSubmit={(t) => {
+              handleUpdateText(t);
+              close();
+            }}
+            onCancel={() => {
               close();
             }}
           />
         )}
       </Popup>
-      {/* ////////////////////////////////////////////////////////////////////////////////// */}
 
-      <ItemButton action="Delete" onClick={markAsDeleted} />
+      <button onClick={markAsDeleted}>Delete</button>
     </li>
   );
 }

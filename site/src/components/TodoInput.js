@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import './TodoInput.css';
 
-export default function TodoInput({ initVal, buttonText, onClick }) {
-  const [value, setValue] = useState(initVal);
+export default function TodoInput({ value, buttonText, onSubmit, onCancel }) {
+  const [text, setText] = useState(value || '');
   const [isValid, setIsValid] = useState(false);
 
+  const canSubmit = typeof onSubmit === 'function';
+  const canCancel = typeof onCancel === 'function';
+
   const handleChange = (e) => {
-    const newValue = e.target.value;
-    console.log('hc');
-    validate(newValue);
-    setValue((value) => newValue);
+    const newText = e.target.value;
+    validate(newText);
+    setText((text) => newText);
   };
 
-  const validate = (value) => {
+  const validate = (text) => {
     /*
     g - flag: don't stop at the first match
     i - flag: ignore case
@@ -25,32 +27,53 @@ export default function TodoInput({ initVal, buttonText, onClick }) {
     - spaces
     */
     const regex = /^[a-z0-9 ]+$/gi;
-    const newIsValid = value.match(regex);
-    console.log(value.match(regex));
+    const newIsValid = text.match(regex);
 
     setIsValid((isValid) => newIsValid);
   };
 
+  const handleCancel = (e) => {
+    e.preventDefault();
+    if (canCancel) {
+      onCancel();
+    }
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
-    onClick(value);
-    setValue((value) => '');
+    if (canSubmit) {
+      onSubmit(text);
+    }
+    setText((text) => '');
     setIsValid((isValid) => false);
   };
 
+  //
+  //-------
+  //
+
   useEffect(() => {
-    validate(initVal || '');
-  }, []);
+    validate(text);
+  }, [text]);
+
+  //only show the cancel button if an onCancel function is passed
+  const CancelButton = canCancel ? (
+    <button className="cancel" onClick={handleCancel}>
+      Cancel
+    </button>
+  ) : (
+    ''
+  );
 
   return (
     <form onSubmit={handleSubmit} className="TodoInput">
       <input
-        value={value}
+        value={text}
         className={!isValid ? 'invalid' : ''}
         onChange={handleChange}
         type="text"
       />
-      <input type="submit" disabled={!isValid} value={buttonText || 'Add'} />
+      <input type="submit" disabled={!isValid} value={buttonText || 'OK'} />
+      {CancelButton}
     </form>
   );
 }

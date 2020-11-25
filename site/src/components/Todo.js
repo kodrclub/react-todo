@@ -16,7 +16,7 @@ export default function Todo() {
     setItems((items) => [...items]);
   };
 
-  const didClickAddItem = (text) => {
+  const handleAddItem = (text) => {
     const id = Math.random();
     const isDone = false;
     const newItem = {
@@ -45,7 +45,7 @@ export default function Todo() {
     <div className="Todo">
       <h1>Todo</h1>
 
-      <TodoInput onClick={didClickAddItem} />
+      <TodoInput buttonText="Add" onSubmit={handleAddItem} />
 
       <div className="foo">
         <TodoList items={items} onChange={itemsDidChange} />

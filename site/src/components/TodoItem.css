@@ -24,7 +24,14 @@
   padding: 1em;
   background: red;
 }
-/* .modal > .content {
-  width: 100%;
-  padding: 10px 5px;
-} */
+
+.TodoItem button {
+  background: rgba(255, 0, 0, 0.2);
+  padding: 0.5em;
+  margin-left: 1em;
+  color: white;
+}
+
+.TodoItem button:disabled {
+  opacity: 0.3;
+}
