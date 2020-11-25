@@ -16,12 +16,13 @@ export default function Todo() {
     setItems((items) => [...items]);
   };
 
-  const didClickAddItem = () => {
+  const didClickAddItem = (text) => {
     const id = Math.random();
+    const isDone = false;
     const newItem = {
-      id: id,
-      text: id.toString().substr(-6),
-      isDone: false,
+      id,
+      text,
+      isDone,
     };
     setItems((items) => [...items, newItem]);
   };
@@ -43,7 +44,9 @@ export default function Todo() {
   return (
     <div className="Todo">
       <h1>Todo</h1>
+
       <TodoInput onClick={didClickAddItem} />
+
       <div className="foo">
         <TodoList items={items} onChange={itemsDidChange} />
         <TodoList items={items} onChange={itemsDidChange} />
