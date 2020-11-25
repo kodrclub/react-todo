@@ -7,31 +7,25 @@
   margin-bottom: 0.5em;
 }
 
-.isDone,
-.isNotDone {
-  flex: 10 0;
-}
-.isDone {
-  text-decoration: line-through;
-  opacity: 0.3;
-}
-
-.TodoItem.itemButton {
+button {
   flex: 1 0;
-}
-
-.EditModal {
-  padding: 1em;
-  background: red;
-}
-
-.TodoItem button {
   background: rgba(255, 0, 0, 0.2);
   padding: 0.5em;
   margin-left: 1em;
   color: white;
+
+  &:disabled {
+    opacity: 0.3;
+  }
 }
 
-.TodoItem button:disabled {
+.isDone,
+.isNotDone {
+  flex: 10 0;
+  text-align: left;
+  margin-left: 1em;
+}
+.isDone {
+  text-decoration: line-through;
   opacity: 0.3;
 }

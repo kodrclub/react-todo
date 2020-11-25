@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Todo.css';
+import './Todo.scss';
 
 // import TodoClear from './TodoClear';
 import TodoInput from './TodoInput';
@@ -43,11 +43,11 @@ export default function Todo() {
 
   return (
     <div className="Todo">
-      <h1>Todo</h1>
+      <h1>To Do</h1>
 
       <TodoInput buttonText="Add" onSubmit={handleAddItem} />
 
-      <div className="foo">
+      <div className="double-list-container">
         <TodoList items={items} onChange={itemsDidChange} />
         <TodoList items={items} onChange={itemsDidChange} />
       </div>

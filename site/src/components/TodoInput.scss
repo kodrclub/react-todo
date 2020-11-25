@@ -1,0 +1,30 @@
+.TodoInput {
+  display: flex;
+  padding: 1em;
+  margin-bottom: 1em;
+
+  input[type='text'] {
+    flex: 10 0;
+    padding: 1em;
+    &.invalid {
+      color: red;
+    }
+  }
+
+  input[type='submit'],
+  .cancel {
+    flex: 1 0;
+    padding: 1em;
+    color: white;
+    margin-left: 1em;
+  }
+  input[type='submit'] {
+    background: green;
+    &:disabled {
+      opacity: 0.3;
+    }
+  }
+  .cancel {
+    background: red;
+  }
+}

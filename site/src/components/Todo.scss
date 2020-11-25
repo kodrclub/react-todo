@@ -1,0 +1,20 @@
+.Todo {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 0.5em;
+  width: 90%;
+  max-width: 60em;
+}
+
+.double-list-container {
+  display: flex;
+  flex-wrap: wrap;
+
+  @media (min-width: 768px) {
+    flex-wrap: nowrap;
+  }
+
+  .TodoList {
+    flex: 1 0;
+    margin: 0 0.5em;
+  }
+}

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './TodoInput.css';
+import './TodoInput.scss';
 
 export default function TodoInput({ value, buttonText, onSubmit, onCancel }) {
   const [text, setText] = useState(value || '');
@@ -56,13 +56,15 @@ export default function TodoInput({ value, buttonText, onSubmit, onCancel }) {
   }, [text]);
 
   //only show the cancel button if an onCancel function is passed
-  const CancelButton = canCancel ? (
-    <button className="cancel" onClick={handleCancel}>
-      Cancel
-    </button>
-  ) : (
-    ''
-  );
+  const CancelButton = () => {
+    return canCancel ? (
+      <button className="cancel" onClick={handleCancel}>
+        Cancel
+      </button>
+    ) : (
+      ''
+    );
+  };
 
   return (
     <form onSubmit={handleSubmit} className="TodoInput">
@@ -73,7 +75,7 @@ export default function TodoInput({ value, buttonText, onSubmit, onCancel }) {
         type="text"
       />
       <input type="submit" disabled={!isValid} value={buttonText || 'OK'} />
-      {CancelButton}
+      <CancelButton />
     </form>
   );
 }

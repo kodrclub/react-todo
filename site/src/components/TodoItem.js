@@ -1,5 +1,5 @@
 import React from 'react';
-import './TodoItem.css';
+import './TodoItem.scss';
 import TodoInput from './TodoInput';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';

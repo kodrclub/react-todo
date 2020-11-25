@@ -1,5 +1,5 @@
 import React from 'react';
-import './TodoList.css';
+import './TodoList.scss';
 import TodoItem from './TodoItem';
 
 export default function TodoList({ items, onChange }) {
