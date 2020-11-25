@@ -7,12 +7,28 @@ export default function TodoInput({ onClick }) {
 
   const handleChange = (e) => {
     const newValue = e.target.value;
+    console.log('hc');
     validate(newValue);
     setValue((value) => newValue);
   };
 
   const validate = (value) => {
-    const newIsValid = 0 < value.length;
+    /*
+    g - flag: don't stop at the first match
+    i - flag: ignore case
+    ^ - from the beginning of the string...
+    $ - ...to the end of the string
+    + - the string needs to contain one or more...
+    [a-z0-9 ] - ...of these characters:
+        - characters from a to z (or A to Z since we are using the i flag to ignore case)
+        - characters from 0 to 9
+        - spaces
+
+    */
+    const regex = /^[a-z0-9 ]+$/gi;
+    const newIsValid = value.match(regex);
+    console.log(value.match(regex));
+
     setIsValid((isValid) => newIsValid);
   };
 
@@ -25,7 +41,12 @@ export default function TodoInput({ onClick }) {
 
   return (
     <form onSubmit={handleSubmit} className="TodoInput">
-      <input value={value} onChange={handleChange} type="text" />
+      <input
+        value={value}
+        className={!isValid ? 'invalid' : ''}
+        onChange={handleChange}
+        type="text"
+      />
       <input type="submit" disabled={!isValid} value="Add" />
     </form>
   );

@@ -10,6 +10,9 @@
   padding: 1em;
   margin-right: 1em;
 }
+.TodoInput input[type='text'].invalid {
+  color: red;
+}
 
 .TodoInput input[type='submit'] {
   flex: 1 0;
