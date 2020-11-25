@@ -1,39 +1,32 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './TodoItem.css';
 import ItemButton from './ItemButton';
 
 export default function TodoItem({ item, onChange }) {
-  const [todo, setTodo] = useState(item);
-
   const editText = () => {
-    todo.text = Math.random().toString().substr(-6);
-    updateTodo(todo);
+    item.text = Math.random().toString().substr(-6);
+    onChange(item);
   };
 
   // For historical purposes, instead of actually deleting items
   // we'll just mark them as such by adding a timestamp to the isDeleted prop
   const markAsDeleted = () => {
-    if (window.confirm(`Delete "${todo.text}". Are you sure?`)) {
-      todo.isDeleted = Date();
-      updateTodo(todo);
+    if (window.confirm(`Delete "${item.text}". Are you sure?`)) {
+      item.isDeleted = Date();
+      onChange(item);
     }
   };
 
   const toggleIsDone = () => {
-    todo.isDone = !todo.isDone;
-    updateTodo(todo);
+    item.isDone = !item.isDone;
+    onChange(item);
   };
 
-  const updateTodo = () => {
-    setTodo((todo) => todo);
-    onChange(todo);
-  };
-
-  const textClassName = todo.isDone ? 'isDone' : 'isNotDone';
+  const textClassName = item.isDone ? 'isDone' : 'isNotDone';
   return (
     <li className="TodoItem">
-      <span className={textClassName}>{todo.text}</span>
-      <ItemButton action="Edit" onClick={editText} isDisabled={todo.isDone} />
+      <span className={textClassName}>{item.text}</span>
+      <ItemButton action="Edit" onClick={editText} isDisabled={item.isDone} />
       <ItemButton action="Delete" onClick={markAsDeleted} />
       <ItemButton action="Toggle" onClick={toggleIsDone} />
     </li>
