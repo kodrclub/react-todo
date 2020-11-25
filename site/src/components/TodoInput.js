@@ -3,9 +3,9 @@ import './TodoInput.css';
 
 export default function TodoInput({ onClick }) {
   return (
-    <div className="TodoInput">
-      TodoInput
+    <form className="TodoInput">
+      <input type="text" />
       <button onClick={onClick}>Add </button>
-    </div>
+    </form>
   );
 }

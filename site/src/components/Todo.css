@@ -1,11 +1,19 @@
 .Todo {
   background: rgba(0, 0, 0, 0.2);
   padding: 0.5em;
+  width: 90%;
+  max-width: 60em;
 }
 
 /*//////////////////////////////////////*/
 .foo {
   display: flex;
+  flex-wrap: wrap;
+}
+@media (min-width: 768px) {
+  .foo {
+    flex-wrap: nowrap;
+  }
 }
 .foo.TodoList {
   flex: 1 0;

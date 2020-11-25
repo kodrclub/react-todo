@@ -1,5 +1,19 @@
 .TodoInput {
+  display: flex;
   background: rgba(0, 0, 128, 0.2);
   padding: 1em;
   margin-bottom: 1em;
+}
+
+.TodoInput input {
+  flex: 10 0;
+  padding: 1em;
+  margin-right: 1em;
+}
+
+.TodoInput button {
+  flex: 1 0;
+  padding: 1em;
+  color: white;
+  background: green;
 }
