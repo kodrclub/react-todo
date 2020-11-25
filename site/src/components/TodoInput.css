@@ -5,19 +5,19 @@
   margin-bottom: 1em;
 }
 
-.TodoInput input {
+.TodoInput input[type='text'] {
   flex: 10 0;
   padding: 1em;
   margin-right: 1em;
 }
 
-.TodoInput button {
+.TodoInput input[type='submit'] {
   flex: 1 0;
   padding: 1em;
   color: white;
   background: green;
 }
 
-.TodoInput button:disabled {
+.TodoInput input[type='submit']:disabled {
   opacity: 0.2;
 }
