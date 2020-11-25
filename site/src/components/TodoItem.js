@@ -33,14 +33,14 @@ export default function TodoItem({ item, onChange }) {
 
   return (
     <li className="TodoItem">
-      <button onClick={toggleIsDone}>Toggle</button>
+      <button onClick={toggleIsDone}>{item.isDone ? '✔' : '🟦'}</button>
 
       <span className={textClassName}>{item.text}</span>
 
       <Popup
         modal
         className="EditModal"
-        trigger={<button disabled={item.isDone}>Edit</button>}
+        trigger={<button disabled={item.isDone}>🖊</button>}
       >
         {(close) => (
           <TodoInput
@@ -57,7 +57,7 @@ export default function TodoItem({ item, onChange }) {
         )}
       </Popup>
 
-      <button onClick={markAsDeleted}>Delete</button>
+      <button onClick={markAsDeleted}>❌</button>
     </li>
   );
 }

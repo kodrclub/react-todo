@@ -51,7 +51,9 @@ export default function Todo() {
         <TodoList items={items} onChange={itemsDidChange} />
         <TodoList items={items} onChange={itemsDidChange} />
       </div>
-      <button onClick={didClickClearItems}>Clear all</button>
+      <button className="clearAll" onClick={didClickClearItems}>
+        💣 Clear all
+      </button>
     </div>
   );
 }

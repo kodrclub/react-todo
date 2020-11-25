@@ -3,7 +3,7 @@ import './TodoList.scss';
 import TodoItem from './TodoItem';
 
 export default function TodoList({ items, onChange }) {
-  const itemDidChange = (item) => {
+  const handleItemChange = (item) => {
     const index = items.findIndex((oldItem) => item.id === oldItem.id);
     items[index] = { ...item, isDone: item.isDone, text: item.text };
     onChange(items);
@@ -23,7 +23,7 @@ export default function TodoList({ items, onChange }) {
               return '';
             }
             return (
-              <TodoItem key={index} item={item} onChange={itemDidChange} />
+              <TodoItem key={index} item={item} onChange={handleItemChange} />
             );
           })
           .reverse()}

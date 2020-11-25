@@ -1,18 +1,20 @@
 .TodoItem {
-  list-style: none;
   display: flex;
 
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.1);
+  color: rgba(0, 0, 0, 0.6);
   padding: 0.5em;
   margin-bottom: 0.5em;
 }
 
 button {
   flex: 1 0;
-  background: rgba(255, 0, 0, 0.2);
+  // background: rgba(255, 0, 0, 0.2);
+  background: rgba(255, 255, 255, 0.6);
+  border: 3px solid rgba(0, 0, 0, 0.3);
   padding: 0.5em;
   margin-left: 1em;
-  color: white;
+  // color: white;
 
   &:disabled {
     opacity: 0.3;

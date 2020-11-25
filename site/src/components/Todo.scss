@@ -1,20 +1,36 @@
 .Todo {
-  background: rgba(0, 0, 0, 0.2);
-  padding: 0.5em;
+  // background: rgba(0, 0, 0, 0.1);
+  padding: 1.5em;
   width: 90%;
   max-width: 60em;
-}
 
-.double-list-container {
-  display: flex;
-  flex-wrap: wrap;
-
-  @media (min-width: 768px) {
-    flex-wrap: nowrap;
+  h1 {
+    color: rgba(0, 0, 0, 0.6);
   }
 
-  .TodoList {
-    flex: 1 0;
-    margin: 0 0.5em;
+  .clearAll {
+    padding: 1em;
+    background-color: rgb(200, 0, 0);
+    color: white;
+    font-family: 'Segoe Ui', 'Courier New' !important;
+  }
+
+  .double-list-container {
+    display: flex;
+    flex-wrap: wrap;
+
+    .TodoList {
+      width: 100%;
+      margin-bottom: 1em;
+    }
+
+    @media (min-width: 768px) {
+      flex-wrap: nowrap;
+      justify-content: space-between;
+
+      .TodoList {
+        width: 49%;
+      }
+    }
   }
 }
