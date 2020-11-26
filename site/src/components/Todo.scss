@@ -8,6 +8,10 @@
     color: rgba(0, 0, 0, 0.6);
   }
 
+  section {
+    margin-bottom: 2em;
+  }
+
   .clearAll {
     padding: 1em;
     background-color: rgb(200, 0, 0);
@@ -20,7 +24,7 @@
 
     .TodoList {
       width: 100%;
-      margin-bottom: 1em;
+      margin: 0.5em 0;
     }
 
     @media (min-width: 768px) {
@@ -29,6 +33,7 @@
 
       .TodoList {
         width: 49%;
+        margin: 0;
       }
     }
   }

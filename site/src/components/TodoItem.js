@@ -39,7 +39,7 @@ export default function TodoItem({ item, onChange }) {
 
       <Popup
         modal
-        className="EditModal"
+        className="edit-modal" //will result in .edit-modal-overlay and .edit-modal-content classnames
         trigger={<button disabled={item.isDone}>🖊</button>}
       >
         {(close) => (

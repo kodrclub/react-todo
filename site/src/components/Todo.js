@@ -45,15 +45,22 @@ export default function Todo() {
     <div className="Todo">
       <h1>To Do</h1>
 
-      <TodoInput buttonText="Add" onSubmit={handleAddItem} />
+      <section>
+        <TodoInput buttonText="Add" onSubmit={handleAddItem} />
+      </section>
 
-      <div className="double-list-container">
-        <TodoList items={items} onChange={itemsDidChange} />
-        <TodoList items={items} onChange={itemsDidChange} />
-      </div>
-      <button className="clearAll" onClick={didClickClearItems}>
-        💣 Clear all
-      </button>
+      <section>
+        <div className="double-list-container">
+          <TodoList items={items} onChange={itemsDidChange} />
+          <TodoList items={items} onChange={itemsDidChange} />
+        </div>
+      </section>
+
+      <section>
+        <button className="clearAll" onClick={didClickClearItems}>
+          💣 Clear all
+        </button>
+      </section>
     </div>
   );
 }

@@ -8,22 +8,4 @@
   justify-content: center;
   font-size: calc(8px + 1vmin);
   color: white;
-
-  button {
-    border: none;
-    border-radius: 3px;
-  }
-
-  button,
-  input {
-    font-size: 1em;
-    &:focus {
-      border: none;
-      outline: 1px solid #88f;
-    }
-  }
 }
-
-/* .App-link {
-  color: #61dafb;
-} */
