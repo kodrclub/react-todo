@@ -19,19 +19,15 @@ export default function Todo() {
   const [isUpdatingItem, setIsUpdatingItem] = useState(false);
 
   const handleItemChange = (item) => {
-    console.log('>>> todo');
     const options = {
       method: 'PUT',
       body: JSON.stringify(item),
     };
 
     setIsUpdatingItem(item.id);
-    console.log('ping');
-    // return;
     fetch(`/api/tasks/${item.id}`, options)
       .then((res) => res.json())
       .then((json) => {
-        console.log('pong');
         const index = items.findIndex((item) => json.id === item.id);
         items[index] = { ...item, isDone: json.isDone, text: json.text };
         setItems((items) => [...items]);

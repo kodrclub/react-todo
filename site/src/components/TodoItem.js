@@ -36,7 +36,6 @@ export default function TodoItem({ item, isUpdatingItem, onChange }) {
 
   const toggleIsDone = () => {
     item.isDone = !item.isDone;
-    console.log('>>> ítem');
     onChange(item);
   };
 
@@ -74,6 +73,7 @@ export default function TodoItem({ item, isUpdatingItem, onChange }) {
           <TodoInput
             value={item.text}
             buttonText="Update"
+            stacked={true}
             onSubmit={(t) => {
               handleTextUpdate(t);
               close();

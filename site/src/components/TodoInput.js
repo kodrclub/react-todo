@@ -9,6 +9,7 @@ import Spinner from './Spinner';
 export default function TodoInput({
   value,
   buttonText,
+  stacked = false,
   isBusy = false,
   onSubmit,
   onCancel = null,
@@ -65,8 +66,10 @@ export default function TodoInput({
     validate(text);
   }, [text]);
 
+  const classNames = ['TodoInput', stacked ? 'stacked' : ''].join(' ');
+
   return (
-    <form className="TodoInput">
+    <form className={classNames}>
       <input
         value={text}
         className={!isValid ? 'invalid' : ''}

@@ -26,4 +26,16 @@
   .cancel-button {
     background: #c80000;
   }
+
+  &.stacked {
+    @media (max-width: 768px) {
+      flex-direction: column;
+
+      .submit-button,
+      .cancel-button {
+        margin-left: 0;
+        margin-top: 1em;
+      }
+    }
+  }
 }

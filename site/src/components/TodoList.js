@@ -26,7 +26,6 @@ export default function TodoList({ items, isUpdatingItem, onItemChange }) {
                 item={item}
                 isUpdatingItem={isUpdatingItem}
                 onChange={(item) => {
-                  console.log('>>> list');
                   onItemChange(item);
                 }}
               />
