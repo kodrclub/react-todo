@@ -1,33 +1,49 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Todo.scss';
 
 import TodoInput from './TodoInput';
 import TodoList from './TodoList';
-import Foo from './Foo'; //////////////////////////////////////////////////////////////////////////////////////
+// import Foo from './Foo'; //////////////////////////////////////////////////////////////////////////////////////
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFireAlt as faClearAll } from '@fortawesome/free-solid-svg-icons';
 
 export default function Todo() {
-  const [items, setItems] = useState([
-    { id: 1, text: 'item A', isDone: false },
-    { id: 2, text: 'item B', isDone: true },
-    { id: 3, text: 'item C', isDone: false },
-  ]);
+  const [items, setItems] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isAdding, setIsAdding] = useState(false);
 
   const itemsDidChange = (items) => {
     setItems((items) => [...items]);
   };
 
   const handleAddItem = (text) => {
-    const id = Math.random();
-    const isDone = false;
-    const newItem = {
-      id,
+    // const id = Math.random();
+    // const isDone = false;
+    // const newItem = {
+    //   id,
+    //   text,
+    //   isDone,
+    // };
+    // setItems((items) => [...items, newItem]);
+    const newAttrs = {
       text,
-      isDone,
+      isDone: false,
     };
-    setItems((items) => [...items, newItem]);
+    const options = {
+      method: 'POST',
+      body: JSON.stringify(newAttrs),
+    };
+
+    setIsAdding(true);
+    fetch('/api/tasks', options)
+      .then((res) => res.json())
+      .then((json) => {
+        setItems((tasks) => [...tasks, json.task]);
+      })
+      .finally(() => {
+        setIsAdding(false);
+      });
   };
 
   const didClickClearItems = () => {
@@ -44,22 +60,38 @@ export default function Todo() {
     }
   };
 
+  useEffect(() => {
+    setIsLoading(true);
+    fetch('/api/tasks')
+      .then((res) => res.json())
+      .then((json) => {
+        setItems(json.tasks);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }, []);
+
   return (
     <div className="Todo">
       <h1>To Do</h1>
       <section>
-        <Foo />
+        {isAdding ? (
+          <p>Adding task...</p>
+        ) : (
+          <TodoInput buttonText="Add" onSubmit={handleAddItem} />
+        )}
       </section>
 
       <section>
-        <TodoInput buttonText="Add" onSubmit={handleAddItem} />
-      </section>
-
-      <section>
-        <div className="double-list-container">
-          <TodoList items={items} onChange={itemsDidChange} />
-          <TodoList items={items} onChange={itemsDidChange} />
-        </div>
+        {isLoading ? (
+          <p>Loading tasks...</p>
+        ) : (
+          <div className="double-list-container">
+            <TodoList items={items} onChange={itemsDidChange} />
+            <TodoList items={items} onChange={itemsDidChange} />
+          </div>
+        )}
       </section>
 
       <section>

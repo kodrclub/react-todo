@@ -30,10 +30,11 @@ export function makeServer({ environment = 'test' } = {}) {
     },
 
     routes() {
+      this.timing = 3000; //fake a 3 second delay in requests
       this.namespace = 'api';
 
-      this.get('/tasks', (schema) => {
-        return schema.tasks.all();
+      this.get('/tasks', ({ tasks }) => {
+        return tasks.all();
       });
 
       let newId = 4;
