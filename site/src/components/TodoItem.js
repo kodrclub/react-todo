@@ -40,9 +40,9 @@ export default function TodoItem({ item, onChange }) {
     <li className="TodoItem">
       <button onClick={toggleIsDone}>
         {item.isDone ? (
-          <FontAwesomeIcon icon={faIsDone} size="lg" />
+          <FontAwesomeIcon icon={faIsDone} size="2x" />
         ) : (
-          <FontAwesomeIcon icon={faIsNotDone} size="lg" />
+          <FontAwesomeIcon icon={faIsNotDone} size="2x" />
         )}
       </button>
 
