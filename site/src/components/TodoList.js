@@ -2,13 +2,11 @@ import React from 'react';
 import './TodoList.scss';
 import TodoItem from './TodoItem';
 
-export default function TodoList({ items, onChange }) {
-  const handleItemChange = (item) => {
-    const index = items.findIndex((oldItem) => item.id === oldItem.id);
-    items[index] = { ...item, isDone: item.isDone, text: item.text };
-    onChange(items);
-  };
+//
+//
+//
 
+export default function TodoList({ items, onChangeItems, onChangeItem }) {
   const contents =
     // Try to find at least an item that's not marked as deleted.
     // If none are found, consider the list empty
@@ -23,7 +21,13 @@ export default function TodoList({ items, onChange }) {
               return '';
             }
             return (
-              <TodoItem key={index} item={item} onChange={handleItemChange} />
+              <TodoItem
+                key={index}
+                item={item}
+                onChange={(item) => {
+                  onChangeItem(item);
+                }}
+              />
             );
           })
           .reverse()}

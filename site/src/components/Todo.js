@@ -6,18 +6,24 @@ import TodoList from './TodoList';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFireAlt as faClearAll } from '@fortawesome/free-solid-svg-icons';
-
 import Spinner from './Spinner';
+
+//
+//
+//
+
 export default function Todo() {
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isAdding, setIsAdding] = useState(false);
 
-  const itemsDidChange = (items) => {
+  const handleItemChange = (item) => {
+    const index = items.findIndex((oldItem) => item.id === oldItem.id);
+    items[index] = { ...item, isDone: item.isDone, text: item.text };
     setItems((items) => [...items]);
   };
 
-  const handleAddItem = (text) => {
+  const handleItemAdd = (text) => {
     // const id = Math.random();
     // const isDone = false;
     // const newItem = {
@@ -79,7 +85,7 @@ export default function Todo() {
         <TodoInput
           isBusy={isLoading || isAdding}
           buttonText="Add"
-          onSubmit={handleAddItem}
+          onSubmit={handleItemAdd}
         />
       </section>
 
@@ -93,8 +99,8 @@ export default function Todo() {
           </div>
         ) : (
           <div className="double-list-container">
-            <TodoList items={items} onChange={itemsDidChange} />
-            <TodoList items={items} onChange={itemsDidChange} />
+            <TodoList items={items} onChangeItem={handleItemChange} />
+            <TodoList items={items} onChangeItem={handleItemChange} />
           </div>
         )}
       </section>

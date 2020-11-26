@@ -2,11 +2,15 @@ import React, { useEffect, useState } from 'react';
 import './TodoInput.scss';
 import Spinner from './Spinner';
 
+//
+//
+//
+
 export default function TodoInput({
   value,
   buttonText,
   isBusy = false,
-  onSubmit = () => {},
+  onSubmit,
   onCancel = null,
 }) {
   const [text, setText] = useState(value || '');

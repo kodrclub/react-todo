@@ -14,8 +14,12 @@ import {
   faSquare as faIsNotDone,
 } from '@fortawesome/free-regular-svg-icons';
 
+//
+//
+//
+
 export default function TodoItem({ item, onChange }) {
-  const handleUpdateText = (t) => {
+  const handleTextUpdate = (t) => {
     item.text = t;
     onChange(item);
   };
@@ -62,7 +66,7 @@ export default function TodoItem({ item, onChange }) {
             value={item.text}
             buttonText="Update"
             onSubmit={(t) => {
-              handleUpdateText(t);
+              handleTextUpdate(t);
               close();
             }}
             onCancel={() => {

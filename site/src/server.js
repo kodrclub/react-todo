@@ -44,6 +44,10 @@ export function makeServer({ environment = 'test' } = {}) {
 
         return { task: attrs };
       });
+
+      this.put('/tasks', (schema, request) => {
+        console.log(request);
+      });
     },
   });
 
