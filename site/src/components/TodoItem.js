@@ -4,12 +4,17 @@ import TodoInput from './TodoInput';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 
-export default function TodoItem({ item, onChange }) {
-  // const editText = () => {
-  //   item.text = Math.random().toString().substr(-6);
-  //   onChange(item);
-  // };
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faTrashAlt as faDelete,
+  faPencilAlt as faEdit,
+} from '@fortawesome/free-solid-svg-icons';
+import {
+  faCheckSquare as faIsDone,
+  faSquare as faIsNotDone,
+} from '@fortawesome/free-regular-svg-icons';
 
+export default function TodoItem({ item, onChange }) {
   const handleUpdateText = (t) => {
     item.text = t;
     onChange(item);
@@ -33,14 +38,24 @@ export default function TodoItem({ item, onChange }) {
 
   return (
     <li className="TodoItem">
-      <button onClick={toggleIsDone}>{item.isDone ? '✔' : '🟦'}</button>
+      <button onClick={toggleIsDone}>
+        {item.isDone ? (
+          <FontAwesomeIcon icon={faIsDone} size="lg" />
+        ) : (
+          <FontAwesomeIcon icon={faIsNotDone} size="lg" />
+        )}
+      </button>
 
       <span className={textClassName}>{item.text}</span>
 
       <Popup
         modal
         className="edit-modal" //will result in .edit-modal-overlay and .edit-modal-content classnames
-        trigger={<button disabled={item.isDone}>🖊</button>}
+        trigger={
+          <button disabled={item.isDone}>
+            <FontAwesomeIcon icon={faEdit} size="lg" />
+          </button>
+        }
       >
         {(close) => (
           <TodoInput
@@ -57,7 +72,9 @@ export default function TodoItem({ item, onChange }) {
         )}
       </Popup>
 
-      <button onClick={markAsDeleted}>❌</button>
+      <button onClick={markAsDeleted}>
+        <FontAwesomeIcon icon={faDelete} size="lg" />
+      </button>
     </li>
   );
 }

@@ -5,6 +5,9 @@ import './Todo.scss';
 import TodoInput from './TodoInput';
 import TodoList from './TodoList';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFireAlt as faClearAll } from '@fortawesome/free-solid-svg-icons';
+
 export default function Todo() {
   const [items, setItems] = useState([
     { id: 1, text: 'item A', isDone: false },
@@ -58,7 +61,9 @@ export default function Todo() {
 
       <section>
         <button className="clearAll" onClick={didClickClearItems}>
-          💣 Clear all
+          <FontAwesomeIcon icon={faClearAll} />
+          <span>Clear all</span>
+          <FontAwesomeIcon icon={faClearAll} />
         </button>
       </section>
     </div>

@@ -16,6 +16,13 @@
     padding: 1em;
     background-color: rgb(200, 0, 0);
     color: white;
+
+    span {
+      margin: 0 1em;
+    }
+    svg {
+      opacity: 0.9;
+    }
   }
 
   .double-list-container {
