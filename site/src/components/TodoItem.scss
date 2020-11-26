@@ -26,6 +26,8 @@ button {
   flex: 10 0;
   text-align: left;
   margin-left: 1em;
+  display: inline-flex;
+  align-items: center;
 }
 .isDone {
   text-decoration: line-through;

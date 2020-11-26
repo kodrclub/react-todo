@@ -11,20 +11,20 @@
     }
   }
 
-  input[type='submit'],
-  .cancel {
+  .submit-button,
+  .cancel-button {
     flex: 1 0;
     padding: 1em;
     color: white;
     margin-left: 1em;
   }
-  input[type='submit'] {
+  .submit-button {
     background: green;
     &:disabled {
       opacity: 0.3;
     }
   }
-  .cancel {
+  .cancel-button {
     background: red;
   }
 }

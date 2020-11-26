@@ -58,7 +58,7 @@ export default function TodoInput({ value, buttonText, onSubmit, onCancel }) {
   //only show the cancel button if an onCancel function is passed
   const CancelButton = () => {
     return canCancel ? (
-      <button className="cancel" onClick={handleCancel}>
+      <button className="cancel-button" onClick={handleCancel}>
         Cancel
       </button>
     ) : (
@@ -67,14 +67,20 @@ export default function TodoInput({ value, buttonText, onSubmit, onCancel }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="TodoInput">
+    <form className="TodoInput">
       <input
         value={text}
         className={!isValid ? 'invalid' : ''}
         onChange={handleChange}
         type="text"
       />
-      <input type="submit" disabled={!isValid} value={buttonText || 'OK'} />
+      <button
+        className="submit-button"
+        disabled={!isValid}
+        onClick={handleSubmit}
+      >
+        {buttonText || 'OK'}
+      </button>
       <CancelButton />
     </form>
   );
