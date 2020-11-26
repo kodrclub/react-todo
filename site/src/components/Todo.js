@@ -3,7 +3,6 @@ import './Todo.scss';
 
 import TodoInput from './TodoInput';
 import TodoList from './TodoList';
-// import Foo from './Foo'; //////////////////////////////////////////////////////////////////////////////////////
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFireAlt as faClearAll } from '@fortawesome/free-solid-svg-icons';
