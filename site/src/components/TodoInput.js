@@ -1,11 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import './TodoInput.scss';
+import Spinner from './Spinner';
 
-export default function TodoInput({ value, buttonText, onSubmit, onCancel }) {
+export default function TodoInput({
+  value,
+  buttonText,
+  isBusy = false,
+  onSubmit = () => {},
+  onCancel = null,
+}) {
   const [text, setText] = useState(value || '');
-  const [isValid, setIsValid] = useState(false);
+  const [isValid, setIsValid] = useState(true);
 
-  const canSubmit = typeof onSubmit === 'function';
   const canCancel = typeof onCancel === 'function';
 
   const handleChange = (e) => {
@@ -40,9 +46,9 @@ export default function TodoInput({ value, buttonText, onSubmit, onCancel }) {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (canSubmit) {
-      onSubmit(text);
-    }
+
+    onSubmit(text);
+
     setText((text) => '');
     setIsValid((isValid) => false);
   };
@@ -55,33 +61,29 @@ export default function TodoInput({ value, buttonText, onSubmit, onCancel }) {
     validate(text);
   }, [text]);
 
-  //only show the cancel button if an onCancel function is passed
-  const CancelButton = () => {
-    return canCancel ? (
-      <button className="cancel-button" onClick={handleCancel}>
-        Cancel
-      </button>
-    ) : (
-      ''
-    );
-  };
-
   return (
     <form className="TodoInput">
       <input
         value={text}
         className={!isValid ? 'invalid' : ''}
         onChange={handleChange}
+        disabled={isBusy}
         type="text"
       />
       <button
         className="submit-button"
-        disabled={!isValid}
+        disabled={!isValid || isBusy}
         onClick={handleSubmit}
       >
-        {buttonText || 'OK'}
+        {isBusy ? <Spinner /> : buttonText || 'OK'}
       </button>
-      <CancelButton />
+      {canCancel ? (
+        <button className="cancel-button" onClick={handleCancel}>
+          Cancel
+        </button>
+      ) : (
+        ''
+      )}
     </form>
   );
 }

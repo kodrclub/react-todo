@@ -8,6 +8,7 @@ import TodoList from './TodoList';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFireAlt as faClearAll } from '@fortawesome/free-solid-svg-icons';
 
+import Spinner from './Spinner';
 export default function Todo() {
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -76,16 +77,21 @@ export default function Todo() {
     <div className="Todo">
       <h1>To Do</h1>
       <section>
-        {isAdding ? (
-          <p>Adding task...</p>
-        ) : (
-          <TodoInput buttonText="Add" onSubmit={handleAddItem} />
-        )}
+        <TodoInput
+          isBusy={isLoading || isAdding}
+          buttonText="Add"
+          onSubmit={handleAddItem}
+        />
       </section>
 
       <section>
         {isLoading ? (
-          <p>Loading tasks...</p>
+          <div>
+            <p>Loading tasks...</p>
+            <p>
+              <Spinner />
+            </p>
+          </div>
         ) : (
           <div className="double-list-container">
             <TodoList items={items} onChange={itemsDidChange} />
