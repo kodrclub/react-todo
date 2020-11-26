@@ -45,8 +45,9 @@ export function makeServer({ environment = 'test' } = {}) {
         return { task: attrs };
       });
 
-      this.put('/tasks', (schema, request) => {
-        console.log(request);
+      this.put('/tasks/:id', (schema, request) => {
+        let attrs = JSON.parse(request.requestBody);
+        return { task: attrs };
       });
     },
   });

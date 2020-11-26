@@ -3,6 +3,7 @@ import './TodoItem.scss';
 import TodoInput from './TodoInput';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
+import Spinner from './Spinner';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -18,7 +19,7 @@ import {
 //
 //
 
-export default function TodoItem({ item, onChange }) {
+export default function TodoItem({ item, isUpdatingItem, onChange }) {
   const handleTextUpdate = (t) => {
     item.text = t;
     onChange(item);
@@ -35,13 +36,17 @@ export default function TodoItem({ item, onChange }) {
 
   const toggleIsDone = () => {
     item.isDone = !item.isDone;
+    console.log('>>> ítem');
     onChange(item);
   };
 
+  const isUpdating = item.id === isUpdatingItem;
+
+  const TodoItemClassName = `TodoItem  ${isUpdating ? ' isUpdating' : ''}`;
   const textClassName = item.isDone ? 'isDone' : 'isNotDone';
 
   return (
-    <li className="TodoItem">
+    <li className={TodoItemClassName}>
       <button onClick={toggleIsDone}>
         {item.isDone ? (
           <FontAwesomeIcon icon={faIsDone} size="2x" />
@@ -51,6 +56,10 @@ export default function TodoItem({ item, onChange }) {
       </button>
 
       <span className={textClassName}>{item.text}</span>
+
+      <span className="spinner">
+        <Spinner size="m" />
+      </span>
 
       <Popup
         modal

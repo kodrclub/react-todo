@@ -6,7 +6,7 @@ import TodoItem from './TodoItem';
 //
 //
 
-export default function TodoList({ items, onChangeItems, onChangeItem }) {
+export default function TodoList({ items, isUpdatingItem, onItemChange }) {
   const contents =
     // Try to find at least an item that's not marked as deleted.
     // If none are found, consider the list empty
@@ -24,8 +24,10 @@ export default function TodoList({ items, onChangeItems, onChangeItem }) {
               <TodoItem
                 key={index}
                 item={item}
+                isUpdatingItem={isUpdatingItem}
                 onChange={(item) => {
-                  onChangeItem(item);
+                  console.log('>>> list');
+                  onItemChange(item);
                 }}
               />
             );

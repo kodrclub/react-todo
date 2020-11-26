@@ -16,11 +16,32 @@ export default function Todo() {
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isAdding, setIsAdding] = useState(false);
+  const [isUpdatingItem, setIsUpdatingItem] = useState(false);
 
   const handleItemChange = (item) => {
-    const index = items.findIndex((oldItem) => item.id === oldItem.id);
-    items[index] = { ...item, isDone: item.isDone, text: item.text };
-    setItems((items) => [...items]);
+    console.log('>>> todo');
+    const options = {
+      method: 'PUT',
+      body: JSON.stringify(item),
+    };
+
+    setIsUpdatingItem(item.id);
+    console.log('ping');
+    // return;
+    fetch(`/api/tasks/${item.id}`, options)
+      .then((res) => res.json())
+      .then((json) => {
+        console.log('pong');
+        const index = items.findIndex((item) => json.id === item.id);
+        items[index] = { ...item, isDone: json.isDone, text: json.text };
+        setItems((items) => [...items]);
+      })
+      .catch((e) => {
+        console.error(e);
+      })
+      .finally(() => {
+        setIsUpdatingItem(false);
+      });
   };
 
   const handleItemAdd = (text) => {
@@ -47,12 +68,15 @@ export default function Todo() {
       .then((json) => {
         setItems((tasks) => [...tasks, json.task]);
       })
+      .catch((e) => {
+        console.error(e);
+      })
       .finally(() => {
         setIsAdding(false);
       });
   };
 
-  const didClickClearItems = () => {
+  const handleItemsClear = () => {
     if (window.confirm('Clear all items. Are you sure?')) {
       // Every item that's already marked as deleted is left as is
       // Every other item gets marked as deleted as of this moment
@@ -72,6 +96,9 @@ export default function Todo() {
       .then((res) => res.json())
       .then((json) => {
         setItems(json.tasks);
+      })
+      .catch((e) => {
+        console.error(e);
       })
       .finally(() => {
         setIsLoading(false);
@@ -99,14 +126,22 @@ export default function Todo() {
           </div>
         ) : (
           <div className="double-list-container">
-            <TodoList items={items} onChangeItem={handleItemChange} />
-            <TodoList items={items} onChangeItem={handleItemChange} />
+            <TodoList
+              items={items}
+              isUpdatingItem={isUpdatingItem}
+              onItemChange={handleItemChange}
+            />
+            <TodoList
+              items={items}
+              isUpdatingItem={isUpdatingItem}
+              onItemChange={handleItemChange}
+            />
           </div>
         )}
       </section>
 
       <section>
-        <button className="clearAll" onClick={didClickClearItems}>
+        <button className="clearAll" onClick={handleItemsClear}>
           <FontAwesomeIcon icon={faClearAll} />
           <span>Clear all</span>
           <FontAwesomeIcon icon={faClearAll} />

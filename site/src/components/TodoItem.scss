@@ -25,6 +25,15 @@
       opacity: 0.8;
     }
   }
+  .spinner {
+    flex: 1 0;
+    padding-top: 0.4em;
+    opacity: 0;
+    transition: opacity 1s;
+  }
+}
+.isUpdating .spinner {
+  opacity: 0.8;
 }
 
 .isDone,
